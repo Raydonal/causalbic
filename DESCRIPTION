@@ -25,6 +25,8 @@ Depends: R (>= 4.1)
 Imports:
     gamlss,
     gamlss.dist,
+    grDevices,
+    graphics,
     numDeriv,
     stats
 Suggests:

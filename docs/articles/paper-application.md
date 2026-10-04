@@ -112,13 +112,13 @@ sum(icim$influential)
 #> 7492
 table(icim$type)
 #> continuous    discrete
-#>       3243        4249
+#>       3242        4250
 ```
 
 7,492 of the 53,022 households (14%) are individually influential by the
 $2 \times \text{mean(ICIM)}$ screening rule, a leverage diagnostic, not
 a claim that these households have unusually large individual effects.
-Most of them (4,249) are influential through the discrete component, the
+Most of them (4,250) are influential through the discrete component, the
 same component that dominates the aggregate curvature.
 
 ## Sensitivity to unmeasured confounding
@@ -144,6 +144,20 @@ single realistic unmeasured confounder would produce. We report
 `Gamma_star` honestly rather than omit it, and read it as an open
 problem in calibrating this style of bound at large sample sizes, not as
 evidence against the effect.
+
+## Goodness-of-fit diagnostics
+
+Figure 5 of the manuscript: randomized quantile residuals against the
+fitted mean and against log household income, a normal QQ plot, and the
+residual density, with the 150 most extreme residuals always shown
+(orange) rather than left to a random subsample that could hide them.
+
+``` r
+plot_diagnostics(fit, dat, covariate = "linc",
+                  covariate_lab = "log household income", seed = 20260828)
+#> Deviance 78384.9, AIC 78442.9, BIC 78700.4; Filliben 0.9999;
+#> Shapiro-Wilk on a subsample of 5000: W = 0.9995 (p = 0.17)
+```
 
 ## Reference
 

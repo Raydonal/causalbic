@@ -203,6 +203,31 @@ with, since that weight is a boundary probability); see Section 4 of the
 manuscript.</p>
 </div>
 <div class="section level2">
+<h2 id="figures">Figures<a class="anchor" aria-label="anchor" href="#figures"></a>
+</h2>
+<p><code>causalbic</code> also ships the plotting functions behind two
+of the manuscript’s figures, so they can be regenerated from the package
+alone, not just their underlying numbers. Both are fully self-contained
+(no external data): [plot_concept()] draws the synthetic two-panel
+illustration of the discrete/continuous decomposition and the
+likelihood-displacement curve behind the causal curvature (Figure 1);
+[plot_cate()] simulates one dataset from the same process as above, fits
+it, and plots the true and estimated conditional average treatment
+effect alongside its two components (Figure 2).</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot_concept.html">plot_concept</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="paper-simulation_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="" width="883.2"></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="fu"><a href="../reference/plot_cate.html">plot_cate</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="paper-simulation_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="" width="883.2"></p>
+<p>(A third figure, the application’s goodness-of-fit diagnostics, needs
+a fitted model on real data and is shown in
+<code><a href="../articles/paper-application.html">vignette("paper-application")</a></code> via
+[plot_diagnostics()].)</p>
+</div>
+<div class="section level2">
 <h2 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a>
 </h2>
 <p>Ospina, R. (2026). Causal inference for proportional outcomes via

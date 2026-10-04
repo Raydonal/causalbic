@@ -36,6 +36,13 @@ reference:
 - title: Simulation
   contents:
   - simulate_bic
+- title: Figures
+  desc: >
+    Reproduce the manuscript's figures from the package alone.
+  contents:
+  - plot_concept
+  - plot_cate
+  - plot_diagnostics
 
 navbar:
   structure:

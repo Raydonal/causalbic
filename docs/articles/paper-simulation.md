@@ -115,6 +115,37 @@ contaminate the mean submodel’s parameters (though it does bias the
 *weight* `tau_mu` is averaged with, since that weight is a boundary
 probability); see Section 4 of the manuscript.
 
+## Figures
+
+`causalbic` also ships the plotting functions behind two of the
+manuscript’s figures, so they can be regenerated from the package alone,
+not just their underlying numbers. Both are fully self-contained (no
+external data): \[plot_concept()\] draws the synthetic two-panel
+illustration of the discrete/continuous decomposition and the
+likelihood-displacement curve behind the causal curvature (Figure 1);
+\[plot_cate()\] simulates one dataset from the same process as above,
+fits it, and plots the true and estimated conditional average treatment
+effect alongside its two components (Figure 2).
+
+``` r
+par(mfrow = c(1, 2))
+plot_concept()
+```
+
+![](paper-simulation_files/figure-html/unnamed-chunk-5-1.png)
+
+``` r
+par(mfrow = c(1, 2))
+invisible(plot_cate())
+```
+
+![](paper-simulation_files/figure-html/unnamed-chunk-6-1.png)
+
+(A third figure, the application’s goodness-of-fit diagnostics, needs a
+fitted model on real data and is shown in
+[`vignette("paper-application")`](https://raydonal.github.io/causalbic/articles/paper-application.md)
+via \[plot_diagnostics()\].)
+
 ## Reference
 
 Ospina, R. (2026). Causal inference for proportional outcomes via

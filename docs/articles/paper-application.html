@@ -182,12 +182,12 @@ curvature step reveals.</p>
 <span><span class="co">#&gt; 7492</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">icim</span><span class="op">$</span><span class="va">type</span><span class="op">)</span></span>
 <span><span class="co">#&gt; continuous    discrete</span></span>
-<span><span class="co">#&gt;       3243        4249</span></span></code></pre></div>
+<span><span class="co">#&gt;       3242        4250</span></span></code></pre></div>
 <p>7,492 of the 53,022 households (14%) are individually influential by
 the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mtext mathvariant="normal">mean(ICIM)</mtext></mrow><annotation encoding="application/x-tex">2\times\text{mean(ICIM)}</annotation></semantics></math>
 screening rule, a leverage diagnostic, not a claim that these households
-have unusually large individual effects. Most of them (4,249) are
+have unusually large individual effects. Most of them (4,250) are
 influential through the discrete component, the same component that
 dominates the aggregate curvature.</p>
 </div>
@@ -213,6 +213,20 @@ contribution, a configuration no single realistic unmeasured confounder
 would produce. We report <code>Gamma_star</code> honestly rather than
 omit it, and read it as an open problem in calibrating this style of
 bound at large sample sizes, not as evidence against the effect.</p>
+</div>
+<div class="section level2">
+<h2 id="goodness-of-fit-diagnostics">Goodness-of-fit diagnostics<a class="anchor" aria-label="anchor" href="#goodness-of-fit-diagnostics"></a>
+</h2>
+<p>Figure 5 of the manuscript: randomized quantile residuals against the
+fitted mean and against log household income, a normal QQ plot, and the
+residual density, with the 150 most extreme residuals always shown
+(orange) rather than left to a random subsample that could hide
+them.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_diagnostics.html">plot_diagnostics</a></span><span class="op">(</span><span class="va">fit</span>, <span class="va">dat</span>, covariate <span class="op">=</span> <span class="st">"linc"</span>,</span>
+<span>                  covariate_lab <span class="op">=</span> <span class="st">"log household income"</span>, seed <span class="op">=</span> <span class="fl">20260828</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Deviance 78384.9, AIC 78442.9, BIC 78700.4; Filliben 0.9999;</span></span>
+<span><span class="co">#&gt; Shapiro-Wilk on a subsample of 5000: W = 0.9995 (p = 0.17)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a>

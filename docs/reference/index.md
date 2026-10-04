@@ -37,3 +37,16 @@ and sensitivity to unmeasured confounding.
 
 - [`simulate_bic()`](https://raydonal.github.io/causalbic/reference/simulate_bic.md)
   : Simulate data from a causal zero-inflated beta (BIc) model
+
+## Figures
+
+Reproduce the manuscript’s figures from the package alone.
+
+- [`plot_concept()`](https://raydonal.github.io/causalbic/reference/plot_concept.md)
+  : The curvature concept figure (Figure 1 of Ospina, 2026)
+- [`plot_cate()`](https://raydonal.github.io/causalbic/reference/plot_cate.md)
+  : The conditional average treatment effect figure (Figure 2 of Ospina,
+  2026)
+- [`plot_diagnostics()`](https://raydonal.github.io/causalbic/reference/plot_diagnostics.md)
+  : Goodness-of-fit diagnostics for a fitted BIc model (Figure 5 of
+  Ospina, 2026)

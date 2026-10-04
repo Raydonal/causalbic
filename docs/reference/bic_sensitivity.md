@@ -46,3 +46,20 @@ A list with `CIC` (the per-unit causal influence vector), `L1`
 which the bound reaches `|tau_hat|`, or `NA` if the bound already
 exceeds it at `Gamma = 1`), and `bound` (a function of `Gamma` returning
 the bound itself).
+
+## Details
+
+`Gamma_star` answers one question: how strong would an unmeasured
+confounder need to be, on an odds-ratio scale, before it could plausibly
+explain away the estimated effect? `Gamma_star` far above 1 means the
+conclusion survives all but an implausibly strong confounder;
+`Gamma_star` close to 1 (or `NA`, meaning the bound already exceeds
+`|tau_hat|` with no confounding at all) means the bound cannot rule out
+even a weak one. A small `Gamma_star` is not necessarily a defect of the
+data or the estimate: at large sample sizes, the worst case this bound
+allows requires *every* unit's confounding to align adversarially with
+the sign of that unit's own contribution, a configuration no single
+realistic confounder produces, so the bound can be sharp for the box
+constraint on confounding it assumes while still not being informative
+in practice; see the vignette and Ospina (2026), Section 8, for a worked
+example where this happens.

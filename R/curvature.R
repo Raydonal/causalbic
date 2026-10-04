@@ -80,6 +80,19 @@
 #'   (internal design/index information reused by [bic_icim()] and
 #'   [bic_sensitivity()]).
 #'
+#' @details
+#' This answers a different question from [bic_gcomp()]. `bic_gcomp()`
+#' says how big the effect is and through which component; `BdT` says how
+#' much the *fitted model itself* depends on the treatment assignment of
+#' the sample at hand, a sensitivity/leverage reading, not an effect size,
+#' and in particular not something that should be expected to equal, or
+#' even track closely, the share each component contributes to `tau`
+#' (one is a share of an average effect, the other a share of a
+#' curvature). A large gap between the two shares is itself informative:
+#' it can mean a submodel affects the curvature, e.g. through a treatment
+#' effect on precision, without affecting `tau` at all, since the mixture
+#' mean does not depend on precision.
+#'
 #' @examples
 #' dat <- simulate_bic(400, seed = 1)
 #' fit <- bic_fit(y ~ T + W2, nu.formula = ~ T + W1, data = dat)
@@ -142,6 +155,19 @@ bic_curvature <- function(fit, treat, data, eps = 1e-4) {
 #'   `ICIM_discrete`, `ICIM_continuous`, `type`
 #'   (`"discrete"`/`"continuous"`/`"mixed"`) and `influential` (logical,
 #'   `ICIM > 2 * mean(ICIM)`).
+#'
+#' @details
+#' `influential = TRUE` flags a unit whose leverage on the fitted model is
+#' more than twice the sample's typical leverage, a screening rule in the
+#' spirit of the `2 * mean(hat value)` rule for leverage in linear models.
+#' It is **not** a claim that the unit has an unusually large individual
+#' treatment effect, and a flagged unit can have a small or even
+#' near-zero estimated effect; leverage and effect size answer different
+#' questions. `type` says which component a flagged unit's leverage runs
+#' through, which is useful for tracing an unexpected curvature share
+#' back to specific observations (e.g. a handful of households with
+#' extreme covariate profiles on the boundary side) rather than treating
+#' the curvature as an unexplained aggregate number.
 #' @export
 bic_icim <- function(cv) {
   stopifnot(inherits(cv, "bic_curvature"))
@@ -186,6 +212,22 @@ bic_icim <- function(cv) {
 #'   \eqn{\Gamma} at which the bound reaches `|tau_hat|`, or `NA` if the
 #'   bound already exceeds it at `Gamma = 1`), and `bound` (a function of
 #'   `Gamma` returning the bound itself).
+#'
+#' @details
+#' `Gamma_star` answers one question: how strong would an unmeasured
+#' confounder need to be, on an odds-ratio scale, before it could
+#' plausibly explain away the estimated effect? `Gamma_star` far above 1
+#' means the conclusion survives all but an implausibly strong confounder;
+#' `Gamma_star` close to 1 (or `NA`, meaning the bound already exceeds
+#' `|tau_hat|` with no confounding at all) means the bound cannot rule out
+#' even a weak one. A small `Gamma_star` is not necessarily a defect of
+#' the data or the estimate: at large sample sizes, the worst case this
+#' bound allows requires *every* unit's confounding to align
+#' adversarially with the sign of that unit's own contribution, a
+#' configuration no single realistic confounder produces, so the bound
+#' can be sharp for the box constraint on confounding it assumes while
+#' still not being informative in practice; see the vignette and Ospina
+#' (2026), Section 8, for a worked example where this happens.
 #' @export
 bic_sensitivity <- function(cv, fit, treat, data, tau_hat, eps = 1e-4) {
   stopifnot(inherits(cv, "bic_curvature"))

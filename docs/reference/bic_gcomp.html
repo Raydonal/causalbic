@@ -29,6 +29,11 @@ positivity); this function does not check them."><meta property="og:image" conte
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/causalbic.html">Get started</a></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/paper-application.html">Reproducing the application (Ospina, 2026)</a></li>
+    <li><a class="dropdown-item" href="../articles/paper-simulation.html">Reproducing the simulation study (Ospina, 2026)</a></li>
+  </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -87,17 +92,25 @@ normalized internally to sum to one. Defaults to equal weights.</p></dd>
     <p>A named numeric vector <code>c(tau, tau_alpha, tau_mu)</code>, with
 <code>tau_alpha + tau_mu == tau</code> exactly (to floating-point precision).</p>
     </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>Reading the three numbers: <code>tau</code> is the total change in the mean
+response caused by treatment. <code>tau_alpha</code> is the part of that change
+coming from treatment moving units onto or off the boundary (a change
+in how many units attain the inflated value); <code>tau_mu</code> is the part
+coming from treatment shifting the conditional mean among units that
+remain in the interior. They can have the same sign (both mechanisms
+reinforcing) or opposite signs (one mechanism offsetting the other, so
+that <code>tau</code> alone understates how much is actually happening); only the
+three-number decomposition distinguishes these cases, since <code>tau</code> by
+itself looks the same either way when the components happen to be
+small, and looks deceptively modest when they are large and opposed.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_bic.html">simulate_bic</a></span><span class="op">(</span><span class="fl">400</span>, seed <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="bic_fit.html">bic_fit</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="cn">T</span> <span class="op">+</span> <span class="va">W2</span>, nu.formula <span class="op">=</span> <span class="op">~</span> <span class="cn">T</span> <span class="op">+</span> <span class="va">W1</span>, data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GAMLSS-RS iteration 1: Global Deviance = 344.8954 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GAMLSS-RS iteration 2: Global Deviance = 295.9198 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GAMLSS-RS iteration 3: Global Deviance = 293.3736 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GAMLSS-RS iteration 4: Global Deviance = 293.3103 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GAMLSS-RS iteration 5: Global Deviance = 293.309 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GAMLSS-RS iteration 6: Global Deviance = 293.3089 </span>
 <span class="r-in"><span><span class="fu">bic_gcomp</span><span class="op">(</span><span class="va">fit</span>, <span class="st">"T"</span>, <span class="va">dat</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         tau   tau_alpha      tau_mu </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  0.04459171 -0.07564943  0.12024114 </span>

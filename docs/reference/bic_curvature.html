@@ -35,6 +35,11 @@ on a closed-form score for a particular link function."><meta property="og:image
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/causalbic.html">Get started</a></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/paper-application.html">Reproducing the application (Ospina, 2026)</a></li>
+    <li><a class="dropdown-item" href="../articles/paper-simulation.html">Reproducing the simulation study (Ospina, 2026)</a></li>
+  </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -102,17 +107,25 @@ blocks, a diagnostic for Lemma 2.1 holding on this fit), and <code>trm</code>
 (internal design/index information reused by <code><a href="bic_icim.html">bic_icim()</a></code> and
 <code><a href="bic_sensitivity.html">bic_sensitivity()</a></code>).</p>
     </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>This answers a different question from <code><a href="bic_gcomp.html">bic_gcomp()</a></code>. <code><a href="bic_gcomp.html">bic_gcomp()</a></code>
+says how big the effect is and through which component; <code>BdT</code> says how
+much the <em>fitted model itself</em> depends on the treatment assignment of
+the sample at hand, a sensitivity/leverage reading, not an effect size,
+and in particular not something that should be expected to equal, or
+even track closely, the share each component contributes to <code>tau</code>
+(one is a share of an average effect, the other a share of a
+curvature). A large gap between the two shares is itself informative:
+it can mean a submodel affects the curvature, e.g. through a treatment
+effect on precision, without affecting <code>tau</code> at all, since the mixture
+mean does not depend on precision.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_bic.html">simulate_bic</a></span><span class="op">(</span><span class="fl">400</span>, seed <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="bic_fit.html">bic_fit</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="cn">T</span> <span class="op">+</span> <span class="va">W2</span>, nu.formula <span class="op">=</span> <span class="op">~</span> <span class="cn">T</span> <span class="op">+</span> <span class="va">W1</span>, data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GAMLSS-RS iteration 1: Global Deviance = 344.8954 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GAMLSS-RS iteration 2: Global Deviance = 295.9198 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GAMLSS-RS iteration 3: Global Deviance = 293.3736 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GAMLSS-RS iteration 4: Global Deviance = 293.3103 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GAMLSS-RS iteration 5: Global Deviance = 293.309 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GAMLSS-RS iteration 6: Global Deviance = 293.3089 </span>
 <span class="r-in"><span><span class="va">cv</span> <span class="op">&lt;-</span> <span class="fu">bic_curvature</span><span class="op">(</span><span class="va">fit</span>, <span class="st">"T"</span>, <span class="va">dat</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">cv</span><span class="op">$</span><span class="va">BdT</span>; <span class="va">cv</span><span class="op">$</span><span class="va">BdT_discrete</span> <span class="op">+</span> <span class="va">cv</span><span class="op">$</span><span class="va">BdT_continuous</span>  <span class="co"># match cv$BdT</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.08341132</span>

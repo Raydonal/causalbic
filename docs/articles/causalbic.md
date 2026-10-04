@@ -52,12 +52,6 @@ continuous-component part (through the conditional mean):
 
 ``` r
 fit <- bic_fit(y ~ T + W2, nu.formula = ~ T + W1, data = dat)
-#> GAMLSS-RS iteration 1: Global Deviance = 448.3807 
-#> GAMLSS-RS iteration 2: Global Deviance = 371.5585 
-#> GAMLSS-RS iteration 3: Global Deviance = 367.9107 
-#> GAMLSS-RS iteration 4: Global Deviance = 367.8287 
-#> GAMLSS-RS iteration 5: Global Deviance = 367.8272 
-#> GAMLSS-RS iteration 6: Global Deviance = 367.8272
 g <- bic_gcomp(fit, treat = "T", data = dat)
 g
 #>         tau   tau_alpha      tau_mu 

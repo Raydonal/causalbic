@@ -54,17 +54,27 @@ information reused by
 and
 [`bic_sensitivity()`](https://raydonal.github.io/causalbic/reference/bic_sensitivity.md)).
 
+## Details
+
+This answers a different question from
+[`bic_gcomp()`](https://raydonal.github.io/causalbic/reference/bic_gcomp.md).
+[`bic_gcomp()`](https://raydonal.github.io/causalbic/reference/bic_gcomp.md)
+says how big the effect is and through which component; `BdT` says how
+much the *fitted model itself* depends on the treatment assignment of
+the sample at hand, a sensitivity/leverage reading, not an effect size,
+and in particular not something that should be expected to equal, or
+even track closely, the share each component contributes to `tau` (one
+is a share of an average effect, the other a share of a curvature). A
+large gap between the two shares is itself informative: it can mean a
+submodel affects the curvature, e.g. through a treatment effect on
+precision, without affecting `tau` at all, since the mixture mean does
+not depend on precision.
+
 ## Examples
 
 ``` r
 dat <- simulate_bic(400, seed = 1)
 fit <- bic_fit(y ~ T + W2, nu.formula = ~ T + W1, data = dat)
-#> GAMLSS-RS iteration 1: Global Deviance = 344.8954 
-#> GAMLSS-RS iteration 2: Global Deviance = 295.9198 
-#> GAMLSS-RS iteration 3: Global Deviance = 293.3736 
-#> GAMLSS-RS iteration 4: Global Deviance = 293.3103 
-#> GAMLSS-RS iteration 5: Global Deviance = 293.309 
-#> GAMLSS-RS iteration 6: Global Deviance = 293.3089 
 cv <- bic_curvature(fit, "T", dat)
 cv$BdT; cv$BdT_discrete + cv$BdT_continuous  # match cv$BdT
 #> [1] 0.08341132

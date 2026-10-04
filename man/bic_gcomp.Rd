@@ -30,6 +30,19 @@ Ospina (2026). Identification rests on the ordinary potential-outcomes
 assumptions (SUTVA, ignorability given the covariates in \code{fit},
 positivity); this function does not check them.
 }
+\details{
+Reading the three numbers: \code{tau} is the total change in the mean
+response caused by treatment. \code{tau_alpha} is the part of that change
+coming from treatment moving units onto or off the boundary (a change
+in how many units attain the inflated value); \code{tau_mu} is the part
+coming from treatment shifting the conditional mean among units that
+remain in the interior. They can have the same sign (both mechanisms
+reinforcing) or opposite signs (one mechanism offsetting the other, so
+that \code{tau} alone understates how much is actually happening); only the
+three-number decomposition distinguishes these cases, since \code{tau} by
+itself looks the same either way when the components happen to be
+small, and looks deceptively modest when they are large and opposed.
+}
 \examples{
 dat <- simulate_bic(400, seed = 1)
 fit <- bic_fit(y ~ T + W2, nu.formula = ~ T + W1, data = dat)

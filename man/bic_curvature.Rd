@@ -39,6 +39,19 @@ of the fitted log-likelihood, the same construction used for the
 real-data results in Ospina (2026), Section 8, so this does not depend
 on a closed-form score for a particular link function.
 }
+\details{
+This answers a different question from \code{\link[=bic_gcomp]{bic_gcomp()}}. \code{bic_gcomp()}
+says how big the effect is and through which component; \code{BdT} says how
+much the \emph{fitted model itself} depends on the treatment assignment of
+the sample at hand, a sensitivity/leverage reading, not an effect size,
+and in particular not something that should be expected to equal, or
+even track closely, the share each component contributes to \code{tau}
+(one is a share of an average effect, the other a share of a
+curvature). A large gap between the two shares is itself informative:
+it can mean a submodel affects the curvature, e.g. through a treatment
+effect on precision, without affecting \code{tau} at all, since the mixture
+mean does not depend on precision.
+}
 \examples{
 dat <- simulate_bic(400, seed = 1)
 fit <- bic_fit(y ~ T + W2, nu.formula = ~ T + W1, data = dat)

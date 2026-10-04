@@ -36,6 +36,13 @@
       <ul class="navbar-nav me-auto">
 <li class="active nav-item"><a class="nav-link" href="../articles/causalbic.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/paper-application.html">Reproducing the application (Ospina, 2026)</a></li>
+    <li><a class="dropdown-item" href="../articles/paper-simulation.html">Reproducing the simulation study (Ospina, 2026)</a></li>
+  </ul>
+</li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
@@ -109,12 +116,6 @@ discrete-component part (through the boundary probability) and a
 continuous-component part (through the conditional mean):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bic_fit.html">bic_fit</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="cn">T</span> <span class="op">+</span> <span class="va">W2</span>, nu.formula <span class="op">=</span> <span class="op">~</span> <span class="cn">T</span> <span class="op">+</span> <span class="va">W1</span>, data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span>
-<span><span class="co">#&gt; GAMLSS-RS iteration 1: Global Deviance = 448.3807 </span></span>
-<span><span class="co">#&gt; GAMLSS-RS iteration 2: Global Deviance = 371.5585 </span></span>
-<span><span class="co">#&gt; GAMLSS-RS iteration 3: Global Deviance = 367.9107 </span></span>
-<span><span class="co">#&gt; GAMLSS-RS iteration 4: Global Deviance = 367.8287 </span></span>
-<span><span class="co">#&gt; GAMLSS-RS iteration 5: Global Deviance = 367.8272 </span></span>
-<span><span class="co">#&gt; GAMLSS-RS iteration 6: Global Deviance = 367.8272</span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bic_gcomp.html">bic_gcomp</a></span><span class="op">(</span><span class="va">fit</span>, treat <span class="op">=</span> <span class="st">"T"</span>, data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span>
 <span><span class="va">g</span></span>
 <span><span class="co">#&gt;         tau   tau_alpha      tau_mu </span></span>

@@ -40,17 +40,25 @@ bic_gcomp(fit, treat, data, weights = NULL)
 A named numeric vector `c(tau, tau_alpha, tau_mu)`, with
 `tau_alpha + tau_mu == tau` exactly (to floating-point precision).
 
+## Details
+
+Reading the three numbers: `tau` is the total change in the mean
+response caused by treatment. `tau_alpha` is the part of that change
+coming from treatment moving units onto or off the boundary (a change in
+how many units attain the inflated value); `tau_mu` is the part coming
+from treatment shifting the conditional mean among units that remain in
+the interior. They can have the same sign (both mechanisms reinforcing)
+or opposite signs (one mechanism offsetting the other, so that `tau`
+alone understates how much is actually happening); only the three-number
+decomposition distinguishes these cases, since `tau` by itself looks the
+same either way when the components happen to be small, and looks
+deceptively modest when they are large and opposed.
+
 ## Examples
 
 ``` r
 dat <- simulate_bic(400, seed = 1)
 fit <- bic_fit(y ~ T + W2, nu.formula = ~ T + W1, data = dat)
-#> GAMLSS-RS iteration 1: Global Deviance = 344.8954 
-#> GAMLSS-RS iteration 2: Global Deviance = 295.9198 
-#> GAMLSS-RS iteration 3: Global Deviance = 293.3736 
-#> GAMLSS-RS iteration 4: Global Deviance = 293.3103 
-#> GAMLSS-RS iteration 5: Global Deviance = 293.309 
-#> GAMLSS-RS iteration 6: Global Deviance = 293.3089 
 bic_gcomp(fit, "T", dat)
 #>         tau   tau_alpha      tau_mu 
 #>  0.04459171 -0.07564943  0.12024114 

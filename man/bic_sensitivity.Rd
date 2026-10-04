@@ -35,3 +35,19 @@ places on confounding with the \eqn{\ell_1} norm of CIC, not the
 including one built from the curvature \code{BdT} itself, is not sharp and
 was a genuine error in an earlier draft of this method.
 }
+\details{
+\code{Gamma_star} answers one question: how strong would an unmeasured
+confounder need to be, on an odds-ratio scale, before it could
+plausibly explain away the estimated effect? \code{Gamma_star} far above 1
+means the conclusion survives all but an implausibly strong confounder;
+\code{Gamma_star} close to 1 (or \code{NA}, meaning the bound already exceeds
+\verb{|tau_hat|} with no confounding at all) means the bound cannot rule out
+even a weak one. A small \code{Gamma_star} is not necessarily a defect of
+the data or the estimate: at large sample sizes, the worst case this
+bound allows requires \emph{every} unit's confounding to align
+adversarially with the sign of that unit's own contribution, a
+configuration no single realistic confounder produces, so the bound
+can be sharp for the box constraint on confounding it assumes while
+still not being informative in practice; see the vignette and Ospina
+(2026), Section 8, for a worked example where this happens.
+}

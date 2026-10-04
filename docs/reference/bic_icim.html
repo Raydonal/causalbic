@@ -25,6 +25,11 @@ influence runs mainly through the discrete or the continuous component
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/causalbic.html">Get started</a></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/paper-application.html">Reproducing the application (Ospina, 2026)</a></li>
+    <li><a class="dropdown-item" href="../articles/paper-simulation.html">Reproducing the simulation study (Ospina, 2026)</a></li>
+  </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -68,6 +73,20 @@ influence runs mainly through the discrete or the continuous component
 <code>ICIM_discrete</code>, <code>ICIM_continuous</code>, <code>type</code>
 (<code>"discrete"</code>/<code>"continuous"</code>/<code>"mixed"</code>) and <code>influential</code> (logical,
 <code>ICIM &gt; 2 * mean(ICIM)</code>).</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p><code>influential = TRUE</code> flags a unit whose leverage on the fitted model is
+more than twice the sample's typical leverage, a screening rule in the
+spirit of the <code>2 * mean(hat value)</code> rule for leverage in linear models.
+It is <strong>not</strong> a claim that the unit has an unusually large individual
+treatment effect, and a flagged unit can have a small or even
+near-zero estimated effect; leverage and effect size answer different
+questions. <code>type</code> says which component a flagged unit's leverage runs
+through, which is useful for tracing an unexpected curvature share
+back to specific observations (e.g. a handful of households with
+extreme covariate profiles on the boundary side) rather than treating
+the curvature as an unexplained aggregate number.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

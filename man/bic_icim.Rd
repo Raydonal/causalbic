@@ -22,3 +22,16 @@ influence runs mainly through the discrete or the continuous component
 (Definition 5.2), and screened for disproportionate influence by the
 \code{2 * mean(ICIM)} rule.
 }
+\details{
+\code{influential = TRUE} flags a unit whose leverage on the fitted model is
+more than twice the sample's typical leverage, a screening rule in the
+spirit of the \verb{2 * mean(hat value)} rule for leverage in linear models.
+It is \strong{not} a claim that the unit has an unusually large individual
+treatment effect, and a flagged unit can have a small or even
+near-zero estimated effect; leverage and effect size answer different
+questions. \code{type} says which component a flagged unit's leverage runs
+through, which is useful for tracing an unexpected curvature share
+back to specific observations (e.g. a handful of households with
+extreme covariate profiles on the boundary side) rather than treating
+the curvature as an unexplained aggregate number.
+}

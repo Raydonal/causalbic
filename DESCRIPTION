@@ -1,0 +1,38 @@
+Package: causalbic
+Title: Causal Inference for Zero-or-One Inflated Beta Regression
+Version: 0.1.0
+Authors@R:
+    person("Raydonal", "Ospina", email = "raydonal@de.ufpe.br",
+           role = c("aut", "cre"))
+Description: Causal inference for proportional outcomes with a point mass
+    at a boundary (zero, one, or both), via the zero-or-one inflated beta
+    (BIc) regression of Ospina and Ferrari (2012). Estimates the average
+    and conditional treatment effect by g-computation and decomposes it
+    exactly into a discrete-component contribution (through the boundary
+    probabilities) and a continuous-component contribution (through the
+    conditional mean), exploiting the block-diagonal Fisher information
+    of the BIc likelihood. Provides a diagnostic layer built on the same
+    separability: a causal conformal normal curvature with the same
+    additive decomposition, a per-unit causal influence screen, and a
+    Hölder-duality sensitivity bound for unmeasured confounding.
+    Companion package to Ospina (2026), "Causal inference for
+    proportional outcomes via likelihood displacement in inflated beta
+    regression".
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Depends: R (>= 4.1)
+Imports:
+    gamlss,
+    gamlss.dist,
+    numDeriv,
+    stats
+Suggests:
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+URL: https://github.com/Raydonal/causalbic, https://raydonal.github.io/causalbic/
+BugReports: https://github.com/Raydonal/causalbic/issues
+Config/roxygen2/version: 8.1.0

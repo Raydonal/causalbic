@@ -1,0 +1,47 @@
+url: https://raydonal.github.io/causalbic/
+
+template:
+  bootstrap: 5
+  bslib:
+    primary: "#2c3e82"
+
+home:
+  title: causalbic
+  description: >
+    Causal inference for proportional outcomes via likelihood displacement
+    in zero-or-one inflated beta regression.
+
+reference:
+- title: Fitting
+  desc: Fit the BIc model and evaluate its fitted parts.
+  contents:
+  - bic_fit
+  - bic_parts
+- title: Identification and estimation
+  desc: >
+    G-computation estimate of the average/conditional treatment effect and
+    its exact discrete/continuous decomposition. This is the layer that
+    identifies the effect; nothing below it changes this result.
+  contents:
+  - bic_gcomp
+  - bic_cate
+- title: Diagnostics
+  desc: >
+    The causal-perturbation diagnostic layer: curvature, per-unit
+    influence, and sensitivity to unmeasured confounding.
+  contents:
+  - bic_curvature
+  - bic_icim
+  - bic_sensitivity
+- title: Simulation
+  contents:
+  - simulate_bic
+
+navbar:
+  structure:
+    left: [intro, reference, articles, news]
+    right: [search, github]
+  components:
+    github:
+      icon: fab fa-github
+      href: https://github.com/Raydonal/causalbic
